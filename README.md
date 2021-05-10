@@ -1,6 +1,5 @@
-# Välkommen till Bothniabladet
+# Välkommen till Bothniabladets backup
 
-Menyn ska ändras, laddar upp ny inom kort
 
 # Getting Started with Create React App
 

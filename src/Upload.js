@@ -124,7 +124,7 @@ function Upload() {
             label="Limited use"
             />
             </div>
-
+            
             <div className="file-input"> 
             { isLimitedUse ? <div className="file-input">
                 <TextField onChange={nrOfCopies} label='Number of copies' />

@@ -1,14 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
-
 :root{
   --primary: #efb6b2;
   --secondary: #4e4e4e;
   --error: #ff4a4a;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
 /* -----------------------------  Base Style & Title  ---------------------------------------- */
 body{
-    font-family: "Noto Serif";
     color: var(--secondary);
   }
   .App{
@@ -51,10 +55,10 @@ body{
 }
 .backdrop-info{
     display: flex;
-    max-width: 50%;
+    max-width: 80%;
     max-height: 50%;
     margin: 60px auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
     border: 1px solid lightgray;
     
 }

@@ -12,6 +12,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Upload from './Upload';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import ContactUs from './components/ContactUs';
+
 
 function App() {
   // hämta 10 åt gången från denna array
@@ -103,12 +105,13 @@ function App() {
       <Navbar />
 
       <Switch>
-         
-
-   
+    
       <Route path="/upload" component={Upload} />
+      <Route path="/contact-us" component={ContactUs} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
+    
+
       <Container>
       <Title />
       <Input change={handleChange} submit={handleSubmit} />
