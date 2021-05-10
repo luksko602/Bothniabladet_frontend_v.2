@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+
+:root{
+  --primary: #efb6b2;
+  --secondary: #4e4e4e;
+  --error: #ff4a4a;
+}
+
+/* -----------------------------  Base Style & Title  ---------------------------------------- */
+body{
+    font-family: "Noto Serif";
+    color: var(--secondary);
+  }
+  .App{
+    margin: 0 auto;
+  }
+  .title h2, .title p{
+    text-align: center;
+  }
+  .title h2{
+    margin-top: 60px;
+    font-size: 2.6rem;
+  }
+  
+/* -----------------------------  Gallery Style ---------------------------------------- */
+
+.search-fail{
+    margin-top: 50px;
+    text-align: center;
+}
+
+
+
+/* -----------------------------  Model Style ---------------------------------------- */
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+.backdrop img{
+    display: block;
+    max-width: 60%;
+    max-height: 80%;
+    margin: 60px auto;
+    box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+    border: 3px solid white;
+    
+}
+.backdrop-info{
+    display: flex;
+    max-width: 50%;
+    max-height: 50%;
+    margin: 60px auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid lightgray;
+    
+}
+.backdrop-info p{
+    margin: 5px auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+}
+
+/* -----------------------------  Upload Form ---------------------------------------- */
+
+form{
+    margin: 30px auto 10px;
+    text-align: center;
+  }
+  label input{
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  .upload-label{
+    display: block;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    margin: 10px auto;
+    line-height: 60px;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 48px;
+  }
+  label:hover{
+    background: var(--primary);
+    color: white;
+  }
+  .output{
+    height: 30px;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .file-input{
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .file-input Button{
+    background: var(--primary);
+    margin: 10px auto;
+
+  }
+
+  .error{
+    color: var(--error);
+  }
