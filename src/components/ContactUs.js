@@ -16,7 +16,7 @@ function ContactUs() {
                 <div id="photographerinfo">
                     <h3> Fotograf </h3>
                 </div>
-                <div id="contenteditor">
+                <div id="contenteditorinfo">
                     <h3> Redigerare </h3>
                 </div>
                 <div id="archivesinfo">
