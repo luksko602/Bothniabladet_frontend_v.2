@@ -46,9 +46,9 @@ body{
 }
 .backdrop img{
     display: block;
-    max-width: 60%;
+    max-width: 80%;
     max-height: 80%;
-    margin: 60px auto;
+    margin: 10px auto;
     box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
     border: 3px solid white;
     
@@ -56,18 +56,57 @@ body{
 .backdrop-info{
     display: flex;
     max-width: 80%;
-    max-height: 50%;
-    margin: 60px auto;
+    max-height: 20%;
+    margin: 10px auto;
     background-color: rgba(0, 0, 0, 0.75);
     border: 1px solid lightgray;
     
 }
-.backdrop-info p{
-    margin: 5px auto;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: white;
+
+
+.backdrop-info th{
+
+  margin: 5px auto;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: white;
 }
+
+.backdrop-info td{
+  margin: 5px auto;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+}
+
+.edit-image{
+  
+  margin-top: 20px;
+  color: var(--primary);
+  text-align: center;
+  cursor: pointer;
+  
+}
+.edit-image:hover {
+
+  color: rgb(119, 116, 116);
+  transition: all 0.2s ease-out;
+}
+.edit-keys{
+  margin-top: 10px;
+  text-align: center;
+}
+.sucess-text{
+  margin-top: 10px;
+  text-align: center;
+  color: var(--primary) !important;
+}
+.key-textfield{
+  color: var(--primary) !important;
+}
+
 
 /* -----------------------------  Upload Form ---------------------------------------- */
 

@@ -32,7 +32,7 @@ function App() {
   const [formData, setFormData] = useState(null);
   // Pages
   const [page, setPage] = useState();
-
+  //const [loggedIn, setLoggedIn] = useState(false);
   
   // Fetch all images
   const fetchData = async () => {
@@ -50,9 +50,7 @@ function App() {
     let request = '';
     
     setLoading(true);
-    // Check if input is empty, if empty search for all images instead
-    // Hantera om resultatet inte finns så den inte får error ANNARS ta bort detta
-    
+
     if(input != null){
       request = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/image/filter.php?keys[0]=${input}`)
     }else{
@@ -97,7 +95,12 @@ function App() {
     alignItems: 'center',
   }}><CircularProgress size={100} /></div>;
 
-
+  /*
+  const getLogIn = (loginData) => {
+    setLoggedIn(loginData)
+    console.log(loggedIn);
+  }
+  */
   return (
     
     <div className="App">

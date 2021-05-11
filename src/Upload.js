@@ -10,7 +10,7 @@ function Upload() {
     const [error, setError] = useState(null);
 
     const [photographerData, setPhotographerData] = useState('');
-    const [cameraData, setCameraData] = useState('');
+    //const [cameraData, setCameraData] = useState('');
     const [locationData, setLocationData] = useState('');
 
     const [isLimitedUse, setIsLimitedUse] = useState(false);
@@ -41,15 +41,19 @@ function Upload() {
           file,   
         )
         formData.append('photographer', photographerData,)
-        formData.append('camera', cameraData,)
+        //formData.append('camera', cameraData,)
         formData.append('location', locationData,)
-        formData.append('limited_usage', nrOfCopiesData,)
+        if(isLimitedUse === true){
+            formData.append('limited_usage', nrOfCopiesData,)
+        }else{
+            formData.append('limited_usage', -1,)
+        }
         formData.append('published', publishedData,)
 
         axios.post('http://localhost/bothniabladet/bothniabladet_backend/server/api/image/create.php', formData, )
         .then(res => {
             console.log(res);
-            console.log('isLimitedUse: ' + isLimitedUse + 'Published: ' + publishedData);
+
         });
       }
 
@@ -57,11 +61,11 @@ function Upload() {
         setPhotographerData(val.target.value);
         console.log(val.target.value);
 
-     }
+     }/*
      const handleChangeCamera = (val) => {
         setCameraData(val.target.value);
         console.log(val.target.value);
-      }
+      }*/
       const handleChangeLocation = (val) => {
         setLocationData(val.target.value);
         console.log(val.target.value);
@@ -94,6 +98,11 @@ function Upload() {
         console.log(publishedData);
       }
 
+
+
+      // SHow image
+
+
     return (
         <div>
             
@@ -112,9 +121,9 @@ function Upload() {
             <div className="file-input">
                 <TextField onChange={handleChangePhotographer } label='Photographer'/>
             </div>
-            <div className="file-input">
+            {/*<div className="file-input">
                 <TextField onChange={handleChangeCamera} label='Camera' />
-            </div>
+            </div>*/}
             <div className="file-input">
                 <TextField onChange={handleChangeLocation} label='Location' />
             </div>
@@ -144,6 +153,7 @@ function Upload() {
                 Upload image
                 </Button>
             </div>
+           
             <h2 style={{textAlign: 'center'}}>Visa bilden här när den laddats upp?</h2>
         </div>
     )

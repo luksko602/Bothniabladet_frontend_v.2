@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,13 +12,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="#">
+        Bothniabladet
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -47,9 +48,52 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+
   const classes = useStyles();
 
+  
+  const [emailData, setEmailData] = useState('');
+  const [passwordData, setPasswordData] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  
+    // Logic here
+    const login = async (email, password) => {
+      console.log('Log in funktion');
+      let request = '';
+      
+      request = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/login.php?email=${email}&password=${password}`)
+    
+      const response = await axios.get(request).then(function (response) {
+        console.log(response); 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+      const data = response.data;
+      
+      if(data.status === true){
+        console.log("Loggade in");
+        setLoggedIn(true);
+      }else{
+        console.log("Loggade inte in!");
+        setLoggedIn(false);
+      }
+      
+      
+    }
+
+    const handleChangeEmail = (val) => {
+      setEmailData(val.target.value);
+      console.log(val.target.value);
+    }
+    const handleChangePassword = (val) => {
+      setPasswordData(val.target.value);
+
+    }
+
   return (
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -60,7 +104,7 @@ export default function SignIn() {
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
+          <TextField onChange={handleChangeEmail}
             variant="outlined"
             margin="normal"
             required
@@ -71,7 +115,7 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
           />
-          <TextField
+          <TextField onChange={handleChangePassword}
             variant="outlined"
             margin="normal"
             required
@@ -86,7 +130,7 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
+          <Button onClick={() => {login(emailData, passwordData)}}
             type="submit"
             fullWidth
             variant="contained"
@@ -113,5 +157,7 @@ export default function SignIn() {
         <Copyright />
       </Box>
     </Container>
+    
   );
+ 
 }
