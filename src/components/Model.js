@@ -1,6 +1,10 @@
 import { Button, TextField } from '@material-ui/core';
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import axios from 'axios'
+import { UserContext } from '../UserContext';
+import { motion } from 'framer-motion';
+
+
 
 const Model = ({ selectedImg, setSelectedImg }) => {
     
@@ -9,7 +13,9 @@ const Model = ({ selectedImg, setSelectedImg }) => {
     const [limitedUsage, setLimitedUsage] = useState(true);
     const [addedSucess, setAddedSucess ] = useState(false);
 
-
+    const {user, setUser} = useContext(UserContext);
+    
+   
     const checkIfLimited = () => {
         if(selectedImg.limited_usage < 0){
             setLimitedUsage(false);
@@ -63,13 +69,16 @@ const Model = ({ selectedImg, setSelectedImg }) => {
         
 
     return (
-        <div className='backdrop' onClick={handleClick}>
+        <motion.div className='backdrop' onClick={handleClick} 
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}>
             
-
-            <div className="edit-image" onClick={toggleEditKeys }>
+        { user ?
+             user.member_type === 'm' ? <div className="edit-image" onClick={toggleEditKeys }>
                 <p>Add keyword</p>
                 <i class="fas fa-edit"></i>
-            </div>
+            </div> : null 
+        : null }
             <div className=""> 
             { editKeys ? <div className="edit-keys">
                 <TextField color="primary"  onChange={handleChangeKeys} label='Enter key here' defaultValue="" 
@@ -84,9 +93,11 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             </div> : null }
             
             
-            <img src={selectedImg.imageURL} alt="Enlarged"/>
+            <motion.img initial={{ y: "-100vh"}} animate={{ y: 0}}
+            src={selectedImg.imageURL} alt="Enlarged"/>
          
-            <div className='backdrop-info'>
+            <motion.div initial={{ y: "-100vh"}} animate={{ y: 0}}
+            className='backdrop-info'>
 
             <table>
              <tr>
@@ -112,8 +123,8 @@ const Model = ({ selectedImg, setSelectedImg }) => {
                 <td>{limitedUsage ? selectedImg.limited_usage : 'Unlimited'}</td>
             </tr>
         </table>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     )
 }
 

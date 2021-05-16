@@ -1,0 +1,43 @@
+import React, { Component } from 'react';
+import { MenuItems } from "./MenuItems"
+import { Button } from "../Button"
+import './Navbar.css'
+import { Link } from 'react-router-dom';
+
+class NavbarMember extends Component {
+state = { clicked: false}
+
+handleClick = () => {
+    this.setState({ clicked: !this.state.clicked })
+}
+closeMenu = () => {
+    this.setState({ clicked: !this.state.clicked })
+}
+
+    render() {
+        return(
+            <nav className="NavbarItems">
+                <h1 className="navbar-logo">BOTHNIABLADET<i className="fas fa-camera"></i></h1>
+                <div className="menu-icon" onClick={this.handleClick}>
+                    <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+                </div>
+                <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
+                {MenuItems.map((item, index) => {
+                        return(
+                            <Link to={item.path} className={item.cName} onClick={this.handleClick}> 
+                            <li key={index}>
+                                {item.title}  
+                            </li>
+                             </Link>
+                        )
+                     })}
+                 </ul>
+                 <Link to='/account'>
+                 <Button>My Account</Button>
+                 </Link>
+            </nav>
+        )
+    }
+}
+
+export default NavbarMember

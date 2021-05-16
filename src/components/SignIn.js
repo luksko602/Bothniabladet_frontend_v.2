@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -13,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 function Copyright() {
   return (
@@ -51,37 +52,75 @@ export default function SignIn() {
 
   const classes = useStyles();
 
-  
+  const {user, setUser} = useContext(UserContext);
+
   const [emailData, setEmailData] = useState('');
   const [passwordData, setPasswordData] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
   
+  
+ 
     // Logic here
     const login = async (email, password) => {
-      console.log('Log in funktion');
+      //event.preventDefault();
       let request = '';
       
       request = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/login.php?email=${email}&password=${password}`)
-    
-      const response = await axios.get(request).then(function (response) {
-        console.log(response); 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
       
+      const response = await axios.get(request);
+      //teasdad
       const data = response.data;
-      
-      if(data.status === true){
-        console.log("Loggade in");
-        setLoggedIn(true);
-      }else{
-        console.log("Loggade inte in!");
-        setLoggedIn(false);
-      }
-      
-      
-    }
+      console.log(data.status);
+
+      if(data.status){
+      let requestUser = '';
+      requestUser = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/read_single.php?id=${data.ID_member}`)
+      const responseUser = await axios.get(requestUser);
+      const dataUser = responseUser.data;
+
+      console.log('ID: ' + dataUser.ID_member);
+     
+    // setUser(JSON.stringify(dataUser));
+
+    // Array version
+    /*
+     setUser([
+      dataUser.ID_member,
+      dataUser.email,
+      dataUser.password,
+      dataUser.first_name,
+      dataUser.last_name,
+      dataUser.city,
+      dataUser.street,
+      dataUser.postal,
+      dataUser.phone,
+      dataUser.discount_amount,
+      dataUser.member_type,   
+    ]
+  );
+    */
+  
+  // Object version (Krånglar)
+     
+      setUser({...user,
+      ID_member: dataUser.ID_member,
+      email: dataUser.email,
+      password: dataUser.password,
+      first_name: dataUser.first_name,
+      last_name: dataUser.last_name,
+      city: dataUser.city,
+      street: dataUser.street,
+      postal: dataUser.postal,
+      phone: dataUser.phone,
+      discount_amount: dataUser.discount_amount,
+      member_type: dataUser.member_type,   
+  }); 
+}else{
+  console.log('Log in failed');
+}
+  //window.location.reload();
+  }
+
+
 
     const handleChangeEmail = (val) => {
       setEmailData(val.target.value);
@@ -91,9 +130,18 @@ export default function SignIn() {
       setPasswordData(val.target.value);
 
     }
-
+    if(user){
+      return(
+        <Container className="signin-box">
+        <h1>Welcome {user.first_name} {user.last_name}! </h1>
+        <Link to='/account' className="link-style">
+        <Button variant="contained" color="primary"  >My Account</Button>
+        </Link>
+        </Container>
+      );
+    }
   return (
-    
+     
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -103,6 +151,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+  
         <form className={classes.form} noValidate>
           <TextField onChange={handleChangeEmail}
             variant="outlined"
@@ -130,8 +179,9 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button onClick={() => {login(emailData, passwordData)}}
-            type="submit"
+          
+          <Button onClick={() => login(emailData, passwordData)}
+            
             fullWidth
             variant="contained"
             color="primary"
@@ -139,6 +189,7 @@ export default function SignIn() {
           >
             Sign In
           </Button>
+     
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -156,6 +207,7 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
+    
     </Container>
     
   );

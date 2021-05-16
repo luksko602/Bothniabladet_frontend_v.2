@@ -1,11 +1,12 @@
 import React, { useState }  from 'react'
 import axios from 'axios'
-import { Input, Button, TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { motion } from 'framer-motion';
 
 function Upload() {
-
+    const [filePreview, setFilePreview] = useState(null);
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
 
@@ -18,7 +19,7 @@ function Upload() {
     // 0 = Not published | 1 = published
     const [publishedData, setPublishedData] = useState();
 
-
+    
     // Allowed image types
     const types = ['image/png', 'image/jpeg'];
 
@@ -29,6 +30,8 @@ function Upload() {
         if (selected && types.includes(selected.type)){
             setFile(selected);
             setError('');
+            // To preview img
+            setFilePreview(URL.createObjectURL(selected));
         }else{
             setFile(null);
             setError('Please select an image file! (png or jpeg)')
@@ -53,6 +56,8 @@ function Upload() {
         axios.post('http://localhost/bothniabladet/bothniabladet_backend/server/api/image/create.php', formData, )
         .then(res => {
             console.log(res);
+            // reload website
+            window.location.reload();
 
         });
       }
@@ -101,8 +106,14 @@ function Upload() {
 
 
       // SHow image
-
-
+      const previewImage = () => {
+        if(file){
+            
+        }
+        console.log(file);
+      }
+      
+      
     return (
         <div>
             
@@ -154,7 +165,8 @@ function Upload() {
                 </Button>
             </div>
            
-            <h2 style={{textAlign: 'center'}}>Visa bilden här när den laddats upp?</h2>
+            {file ? <motion.img initial={{ y: "-100vh", opacity: 0}} animate={{ y: 0, opacity: 1}}
+            className="preview-img" src={filePreview}  alt={'Image to upload'}/> : null}
         </div>
     )
 }

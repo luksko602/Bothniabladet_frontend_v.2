@@ -25,14 +25,53 @@ body{
     margin-top: 60px;
     font-size: 2.6rem;
   }
+  .link-style{
+    text-decoration: none;
+  }
   
 /* -----------------------------  Gallery Style ---------------------------------------- */
+.img-wrap {
 
+  opacity: 0.8;
+  animation: fadeIn 0.5s;
+  -webkit-animation: fadeIn 0.5s;
+  -moz-animation: fadeIn 0.5s;
+  -o-animation: fadeIn 0.5s;
+  -ms-animation: fadeIn 0.5s;
+}
+.img-wrap:hover {
+  opacity: 1;
+  transition-duration: 0.3s;
+}
 .search-fail{
     margin-top: 50px;
     text-align: center;
 }
 
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.8;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.8;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.8;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.8;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.8;}
+}
 
 
 /* -----------------------------  Model Style ---------------------------------------- */
@@ -147,9 +186,34 @@ form{
   .file-input Button{
     background: var(--primary);
     margin: 10px auto;
-
   }
-
   .error{
     color: var(--error);
   }
+  .preview-img{
+    display: block;
+    max-width: 25%;
+    max-height: 25%;
+    margin: 10px auto;
+    box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+    border: 3px solid grey;   
+}
+
+/* -----------------------------  Sign in ---------------------------------------- */
+.signin-box {
+  margin-top: 20px;
+  text-align: center;
+}
+.signin-box Button {
+  margin: 10px auto;
+  text-align: center;
+  background: var(--primary);
+  
+}
+/* -----------------------------  Account ---------------------------------------- */
+
+.Button {
+  margin: 10px auto;
+  text-align: center;
+  background: var(--primary);
+}
