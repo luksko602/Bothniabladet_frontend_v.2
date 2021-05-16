@@ -1,3 +1,5 @@
+
+/*CSS FÖR CONTACT US-SIDAN */
 .contactpage-content{
     background-color: white;
     color: blue;
@@ -13,8 +15,9 @@
     position: absolute;
     top: 200px;
     left: 100px;
-
+    
 }
+
 #editorinfo{
     position: absolute;
     left: 0%;
