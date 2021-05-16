@@ -15,6 +15,7 @@ import ContactUs from './components/ContactUs';
 import { UserContext } from './UserContext';
 import NavbarMember from './components/Navbar/NavbarMember';
 import Account from './Account';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -185,7 +186,7 @@ function App() {
       <UserContext.Provider value={value}>
       <Router>
       { user ? <NavbarMember /> : <Navbar /> }
-        
+      <Footer />
       
 
       <Switch>

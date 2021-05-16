@@ -1,0 +1,9 @@
+/*CSS för applikationens footer */
+.footer{
+    position: absolute;
+    bottom: 0;
+    background-color:#6254fe ;
+    color: white;
+    text-align: center;
+    width: 100%;
+}

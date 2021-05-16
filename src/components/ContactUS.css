@@ -1,0 +1,37 @@
+
+/*CSS FÖR CONTACT US-SIDAN */
+.contactpage-content{
+    background-color: white;
+    color: blue;
+    text-align: center;
+}
+#teaminfosection{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    
+}
+#employeeinfo {
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    
+}
+
+#editorinfo{
+    position: absolute;
+    left: 0%;
+}
+#photographerinfo{
+    position: absolute;
+    left: 100%;
+}
+#contenteditorinfo{
+    position: absolute;
+    left: 200%;
+
+}
+#archivesinfo{
+    position: absolute;
+    left: 350%;
+}
