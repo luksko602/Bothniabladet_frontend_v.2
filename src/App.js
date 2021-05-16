@@ -13,6 +13,7 @@ import Upload from './Upload';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import ContactUs from './components/ContactUs';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -106,6 +107,7 @@ function App() {
     <div className="App">
       <Router>
       <Navbar />
+      <Footer />
 
       <Switch>
     
