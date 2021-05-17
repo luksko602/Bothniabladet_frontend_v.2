@@ -1,9 +1,19 @@
 /*CSS för applikationens footer */
 .footer{
-    position: absolute;
-    bottom: 0;
-    background-color:#6254fe ;
-    color: white;
-    text-align: center;
+    height: 24px;
     width: 100%;
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    position: fixed;
+    bottom:  0pt;
+    left:  0pt;
+}
+.footercontent{
+    height: 24px;
+    width: 100%;
+    text-align: center;
+    background-color: rgb(46, 46, 46);
+    color: white;
 }

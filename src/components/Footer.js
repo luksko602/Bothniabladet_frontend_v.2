@@ -4,11 +4,11 @@ import './Footer.css';
 function Footer() {
     return(
         <div className="footer">
+            <div class="footercontent"> 
             <footer> 
-                <h1> Detta är applikationens footer </h1>
-                <p> Lorem ipsum </p>
-                <p> Lorem ipsum</p>    
+                <h1> Bothniabladet - Copyright @ 2021 </h1>   
             </footer>
+            </div>
         </div>
     );
 }
