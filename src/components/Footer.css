@@ -1,11 +1,10 @@
 /*CSS för applikationens footer */
 .footer{
-    height: 40px;
     width: 100%;
     background-repeat: repeat;
     background-attachment: scroll;
-    position: fixed;
-    bottom:  0%;
+    position: absolute;
+    bottom:  -50%;
 }
 .footercontent{
     width: 100%;
