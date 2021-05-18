@@ -93,44 +93,51 @@ body{
     
 }
 .backdrop-info{
-    display: flex;
-    max-width: 80%;
-    max-height: 20%;
+    display: block;
+    max-width: 60%;
     margin: 10px auto;
-    background-color: rgba(0, 0, 0, 0.75);
-    border: 1px solid lightgray;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid white;
     
 }
-
-
-.backdrop-info th{
-
-  margin: 5px auto;
-  margin-left: 5px;
-  margin-right: 5px;
-  color: white;
+.info-row{
+  margin: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: block;
+  text-align: center;
 }
 
-.backdrop-info td{
-  margin: 5px auto;
-  margin-left: 5px;
-  margin-right: 5px;
+.backdrop-info p{
+  display: flex;
   color: white;
-  border: 1px solid white;
-  padding: 5px;
+  margin-bottom: 5px;
 }
-
-.edit-image{
-  
-  margin-top: 20px;
+.icons-div{
+  text-align: center;
+}
+.model-icon{
+  display: inline-block;
+  margin: 15px;
   color: var(--primary);
   text-align: center;
   cursor: pointer;
   
 }
-.edit-image:hover {
-
-  color: rgb(119, 116, 116);
+.model-icon:hover {
+  color: rgb(255, 253, 253);
+  transition: all 0.2s ease-out;
+}
+.model-icon-delete{
+  display: inline-block;
+  margin: 15px;
+  color: red;
+  text-align: center;
+  cursor: pointer;
+  
+}
+.model-icon-delete:hover {
+  color: rgb(255, 253, 253);
   transition: all 0.2s ease-out;
 }
 .edit-keys{
@@ -168,7 +175,7 @@ form{
     line-height: 60px;
     color: var(--primary);
     font-weight: bold;
-    font-size: 48px;
+    font-size: 3rem;
   }
   label:hover{
     background: var(--primary);

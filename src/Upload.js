@@ -17,7 +17,7 @@ function Upload() {
     const [isLimitedUse, setIsLimitedUse] = useState(false);
     const [nrOfCopiesData, setNrOfCopies] = useState(null);
     // 0 = Not published | 1 = published
-    const [publishedData, setPublishedData] = useState();
+    const [publishedData, setPublishedData] = useState(1);
 
     
     // Allowed image types
@@ -96,9 +96,9 @@ function Upload() {
 
       const published = (e) => {
         if(e.target.checked){
-            setPublishedData(1);
-        }else{
             setPublishedData(0);
+        }else{
+            setPublishedData(1);
         }
         console.log(publishedData);
       }
@@ -155,7 +155,7 @@ function Upload() {
             <div className="file-input"> 
             <FormControlLabel 
             control={<Checkbox value="published" color="primary" onChange={published} />}
-            label="Published"
+            label="Make image private"
             />
             </div>
 
