@@ -1,6 +1,5 @@
 import React from 'react'
-import './ContactUS.css'
-/* Kontaktsidan */
+
 function ContactUs() {
     return (
         <div class="contactpage-content">

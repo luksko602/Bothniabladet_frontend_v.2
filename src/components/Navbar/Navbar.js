@@ -17,8 +17,9 @@ closeMenu = () => {
     render() {
         return(
             <nav className="NavbarItems">
-
-                <h1 className="navbar-logo">BOTHNIABLADET<i className="fas fa-camera"></i></h1>
+                <Link to='/home' className="link-style">
+                <h1 className="navbar-logo">BOTHNIABLADET</h1>
+                </Link>
                 <div className="menu-icon" onClick={this.handleClick}>
                     <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>

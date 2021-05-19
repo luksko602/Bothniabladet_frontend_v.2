@@ -95,17 +95,19 @@ body{
 .backdrop-info{
     display: block;
     max-width: 60%;
+    max-height: 90%;
     margin: 10px auto;
     background-color: rgba(0, 0, 0, 0.9);
     border: 1px solid white;
+    overflow-y:auto;
     
 }
 .info-row{
+  display: block;
   margin: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  display: block;
-  text-align: center;
+  
 }
 
 .backdrop-info p{

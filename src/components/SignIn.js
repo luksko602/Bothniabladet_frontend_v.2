@@ -56,7 +56,7 @@ export default function SignIn() {
 
   const [emailData, setEmailData] = useState('');
   const [passwordData, setPasswordData] = useState('');
-  
+  const [errorMessage, setErrorMessage] = useState('');
   
  
     // Logic here
@@ -72,6 +72,7 @@ export default function SignIn() {
       console.log(data.status);
 
       if(data.status){
+        
       let requestUser = '';
       requestUser = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/read_single.php?id=${data.ID_member}`)
       const responseUser = await axios.get(requestUser);
@@ -79,26 +80,6 @@ export default function SignIn() {
 
       console.log('ID: ' + dataUser.ID_member);
      
-    // setUser(JSON.stringify(dataUser));
-
-    // Array version
-    /*
-     setUser([
-      dataUser.ID_member,
-      dataUser.email,
-      dataUser.password,
-      dataUser.first_name,
-      dataUser.last_name,
-      dataUser.city,
-      dataUser.street,
-      dataUser.postal,
-      dataUser.phone,
-      dataUser.discount_amount,
-      dataUser.member_type,   
-    ]
-  );
-    */
-  
   // Object version (Krånglar)
      
       setUser({...user,
@@ -116,6 +97,7 @@ export default function SignIn() {
   }); 
 }else{
   console.log('Log in failed');
+  setErrorMessage('There is no user with that information!');
 }
   //window.location.reload();
   }
@@ -189,7 +171,8 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-     
+          {errorMessage && <div className="error"> {errorMessage} </div>}
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

@@ -17,7 +17,6 @@ import NavbarMember from './components/Navbar/NavbarMember';
 import Account from './Account';
 import Footer from './components/Footer';
 
-
 function App() {
   
   const [user, setUser] = useState({
@@ -77,6 +76,7 @@ function App() {
     setLoading(true);
     const response = await axios.get('http://localhost/bothniabladet/bothniabladet_backend/server/api/image/read.php')
     const data = await response.data;
+    
     setPhotos(data);
     console.log(data);
     console.log(response);

@@ -36,6 +36,8 @@ const Model = ({ selectedImg, setSelectedImg }) => {
     
     const [keywordsData, setKeywordsData] = useState([]);
 
+    const [tryDelete, setTryDelete] = useState(false);
+
     const checkIfLimited = () => {
         if(selectedImg.limited_usage < 0){
             setLimitedUsage(false);
@@ -163,7 +165,18 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             window.location.reload();
         });
       }
-
+      const controlDelete = () => {
+          setTryDelete(true);
+      }
+      const verifyDelete = (answer) => {
+        if(answer === true){
+            deleteImage();
+            console.log('delete');
+        }else{
+            setTryDelete(false);
+            console.log('cancel');
+        }
+      }
       const getImageKeywords = () => {
         const formData = new FormData()
         formData.append('ID_image', selectedImg.ID_image,)
@@ -197,15 +210,24 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             </div> : 
         <div className="model-icon" onClick={toggleImageInfo } >
                 <i class="fas fa-info"></i>
-                <p>Image info</p>
+                <p>Info</p>
             </div>
         }
         { user ?
-             user.member_type === 'm' ? <div className="model-icon-delete" onClick={deleteImage}>
+             user.member_type === 'm' ? <div className="model-icon-delete" onClick={controlDelete}>
                 <i class="fas fa-trash-alt"></i>
                 <p>Delete image</p>
             </div> : null 
         : null }
+        {tryDelete ? 
+        <div>
+            <p style={{color: 'white'}}>Are you sure you want to delete this image?</p>
+        <Button style={{backgroundColor: 'red', margin: '10px'}} variant="contained" color="primary" onClick={() => verifyDelete(true)} >
+        Yes
+        </Button>
+        <Button style={{margin: '10px'}} variant="contained" color="primary" onClick={() => verifyDelete(false)} >
+        No
+        </Button> </div> : null}
         </div>
             <div className=""> 
             { editKeys ? <div className="edit-keys">
