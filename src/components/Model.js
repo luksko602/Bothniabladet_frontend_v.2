@@ -1,309 +1,259 @@
-import {
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Input,
-  TextField,
-  withStyles,
-} from "@material-ui/core";
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { UserContext } from "../UserContext";
-import { motion } from "framer-motion";
+import { Button, Checkbox, FormControlLabel, Input, TextField, withStyles } from '@material-ui/core';
+import React, {useEffect, useState, useContext} from 'react'
+import axios from 'axios'
+import { UserContext } from '../UserContext';
+import { motion } from 'framer-motion';
 
-const StyledInput = withStyles({
-  root: {
-    borderRadius: 3,
-    color: "white",
-    height: 48,
-    padding: "10px",
-    borderBottom: "1px solid white",
-  },
-})(Input);
+
+const StyledInput = withStyles({ 
+    root: {
+      borderRadius: 3,
+      color: 'white',
+      height: 48,
+      padding: '10px',
+      borderBottom: '1px solid white',
+    },
+  })(Input);
 
 const Model = ({ selectedImg, setSelectedImg }) => {
-  const [editKeys, setEditKeys] = useState(false);
-  const [keyData, setKeyData] = useState("");
-  const [limitedUsage, setLimitedUsage] = useState(true);
-  const [addedSucess, setAddedSucess] = useState(false);
+    
+    const [editKeys, setEditKeys] = useState(false);
+    const [keyData, setKeyData] = useState('');
+    const [limitedUsage, setLimitedUsage] = useState(true);
+    const [addedSucess, setAddedSucess ] = useState(false);
 
-  const { user } = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
-  const [imageInfo, setImageInfo] = useState(false);
+    const [imageInfo, setImageInfo] = useState(false);
+   
+    const [photographerData, setPhotographerData] = useState(null);
+    const [cameraData, setCameraData] = useState(null);
+    const [locationData, setLocationData] = useState(null);
+    const [resolutionData, setResolutionData] = useState(null);
+    const [GPS_coordinatesData, setGPS_coordinatesData] = useState(null);
+    const [limited_usageData, setLimited_usageData] = useState(null);
+    const [publishedData, setPublishedData] = useState(false);
+    
+    const [keywordsData, setKeywordsData] = useState([
 
-  const [photographerData, setPhotographerData] = useState(null);
-  const [cameraData, setCameraData] = useState(null);
-  const [locationData, setLocationData] = useState(null);
-  const [resolutionData, setResolutionData] = useState(null);
-  const [GPS_coordinatesData, setGPS_coordinatesData] = useState(null);
-  const [limited_usageData, setLimited_usageData] = useState(null);
-  const [publishedData, setPublishedData] = useState(false);
+    ]);
 
-  const [keywordsData, setKeywordsData] = useState([]);
+    const [tryDelete, setTryDelete] = useState(false);
 
-  const [tryDelete, setTryDelete] = useState(false);
-
-  const checkIfLimited = () => {
-    if (selectedImg.limited_usage < 0) {
-      setLimitedUsage(false);
-    } else {
-      setLimitedUsage(true);
+    const checkIfLimited = () => {
+        if(selectedImg.limited_usage < 0){
+            setLimitedUsage(false);
+        }else{
+            setLimitedUsage(true);
+        }
+        console.log(limitedUsage )
     }
-    console.log(limitedUsage);
-  };
 
-  const handleClick = (e) => {
-    // Check if clicked outside of image
-    if (e.target.classList.contains("backdrop")) {
-      setSelectedImg(null);
+    const handleClick = (e) => {
+        // Check if clicked outside of image
+        if(e.target.classList.contains('backdrop')){
+            setSelectedImg(null);
+        }    
     }
-  };
-  useEffect(() => {
-    checkIfLimited();
-  });
+    useEffect(() => {
+        checkIfLimited();
+      },)
 
-  const toggleEditKeys = () => {
-    setEditKeys(!editKeys);
-    setAddedSucess(false);
-  };
+    const toggleEditKeys = () => {
+        setEditKeys(!editKeys)
+        setAddedSucess(false);
+    }
 
-  const handleChangeKeys = (val) => {
-    setKeyData(val.target.value);
-    console.log(val.target.value);
-  };
-  const submitKey = () => {
-    console.log("submittar: " + keyData);
+    const handleChangeKeys = (val) => {
+        setKeyData(val.target.value);
+        console.log(val.target.value);
+    }
+    const submitKey = () => {
+      
+        console.log('submittar: ' + keyData);
 
-    const formData = new FormData();
-    formData.append("keyword", keyData);
-    formData.append("ID_image", selectedImg.ID_image);
+        const formData = new FormData()
+        formData.append('keyword', keyData,)
+        formData.append('ID_image', selectedImg.ID_image,)
 
-    if (keyData.length > 0) {
-      axios
-        .post(
-          "http://localhost/bothniabladet/bothniabladet_backend/server/api/keyword/keyword_connect.php",
-          formData
-        )
-        .then((res) => {
-          console.log(res);
+        if(keyData.length > 0){
+            axios.post('http://localhost/bothniabladet/bothniabladet_backend/server/api/keyword/keyword_connect.php', formData, )
+            .then(res => {
+            console.log(res);
         });
-    } else {
-      // dont post
-      console.log("Did not submit, value is empty");
+        }else{
+            // dont post 
+            console.log('Did not submit, value is empty');
+        }
+        // to reset and hide add key
+        setEditKeys(false);
+        setAddedSucess(true);
     }
-    // to reset and hide add key
-    setEditKeys(false);
-    setAddedSucess(true);
-  };
-  const toggleImageInfo = () => {
-    setImageInfo(!imageInfo);
-  };
+    const toggleImageInfo = () => {
+        setImageInfo(!imageInfo);
+        
+    }
 
-  const updateImage = () => {
-    const formData = new FormData();
-    formData.append("ID_image", selectedImg.ID_image);
-    if (photographerData != null) {
-      formData.append("photographer", photographerData);
-    }
-    if (cameraData != null) {
-      formData.append("camera", cameraData);
-    }
-    if (locationData != null) {
-      formData.append("location", locationData);
-    }
-    if (resolutionData != null) {
-      formData.append("resolution", resolutionData);
-    }
-    if (GPS_coordinatesData != null) {
-      formData.append("GPS_coordinates", GPS_coordinatesData);
-    }
-    if (limitedUsage && limited_usageData != null) {
-      formData.append("limited_usage", limited_usageData);
-    }
-    if (publishedData) {
-      formData.append("published", 0);
-    }
-    axios
-      .post(
-        "http://localhost/bothniabladet/bothniabladet_backend/server/api/image/update.php",
-        formData
-      )
-      .then((res) => {
-        console.log(res);
-        // reload website
-        window.location.reload();
-      });
-  };
+    const updateImage = () => {
+        const formData = new FormData()
+        formData.append('ID_image', selectedImg.ID_image,)
+        if(photographerData != null){
+            formData.append('photographer', photographerData,)
+        }
+        if(cameraData != null){
+            formData.append('camera', cameraData,)
+        }
+        if(locationData != null){
+            formData.append('location', locationData,)
+        }
+        if(resolutionData != null){
+            formData.append('resolution', resolutionData,)
+        }
+        if(GPS_coordinatesData != null){
+            formData.append('GPS_coordinates', GPS_coordinatesData,)
+        }
+        if(limitedUsage && limited_usageData != null){
+            formData.append('limited_usage', limited_usageData,)
+        }
+        if(publishedData){
+            formData.append('published', 0)
+        }
+        axios.post('http://localhost/bothniabladet/bothniabladet_backend/server/api/image/update.php', formData, )
+        .then(res => {
+            console.log(res);
+            // reload website
+            window.location.reload();
+        });
+      }
 
-  const handleChangePhotographer = (val) => {
-    setPhotographerData(val.target.value);
-  };
-  const handleChangeCamera = (val) => {
-    setCameraData(val.target.value);
-  };
-  const handleChangeLocation = (val) => {
-    setLocationData(val.target.value);
-  };
-  const handleChangeResolution = (val) => {
-    setResolutionData(val.target.value);
-  };
-  const handleChangeGPS_coordinates = (val) => {
-    setGPS_coordinatesData(val.target.value);
-  };
-  const handleChangeLimited_usage = (val) => {
-    setLimited_usageData(val.target.value);
-  };
-  const handleChangePublished = (val) => {
-    setPublishedData(val.target.value);
-  };
-  const published = (e) => {
-    if (e.target.checked) {
-      setPublishedData(true);
-    } else {
-      setPublishedData(false);
+    const handleChangePhotographer = (val) => {
+        setPhotographerData(val.target.value);
+     }
+     const handleChangeCamera = (val) => {
+        setCameraData(val.target.value);
+      }
+      const handleChangeLocation = (val) => {
+        setLocationData(val.target.value);
+      }
+      const handleChangeResolution = (val) => {
+        setResolutionData(val.target.value);
+      }
+      const handleChangeGPS_coordinates = (val) => {
+        setGPS_coordinatesData(val.target.value);
+      }
+      const handleChangeLimited_usage = (val) => {
+        setLimited_usageData(val.target.value);
+      }
+      const handleChangePublished = (val) => {
+        setPublishedData(val.target.value);
+      }
+      const published = (e) => {
+        if(e.target.checked){
+            setPublishedData(true);
+        }else{
+            setPublishedData(false);
+        }
+        console.log(publishedData);
+      }
+
+      const deleteImage = () => {
+        const formData = new FormData()
+        formData.append('ID_image', selectedImg.ID_image,)
+
+        axios.post('http://localhost/bothniabladet/bothniabladet_backend/server/api/image/delete.php', formData, )
+        .then(res => {
+            console.log(res);
+            // reload website
+            window.location.reload();
+        });
+      }
+      const controlDelete = () => {
+          setTryDelete(true);
+      }
+      const verifyDelete = (answer) => {
+        if(answer === true){
+            deleteImage();
+            console.log('delete');
+        }else{
+            setTryDelete(false);
+            console.log('cancel');
+        }
+      }
+      const getImageKeywords = () => {
+        const formData = new FormData()
+        formData.append('ID_image', selectedImg.ID_image,)
+
+        axios.get(`http://localhost/bothniabladet/bothniabladet_backend/server/api/keyword/keyword_by_id_image.php?id=${selectedImg.ID_image}` )
+        .then(res => {
+            console.log('Keyword result: ' + res.data.keywords);
+            
+            setKeywordsData(JSON.stringify(res.data.keywords));
+            
+        });
     }
-    console.log(publishedData);
-  };
+        useEffect(() => {
+            getImageKeywords();
+          }, [])
 
-  const deleteImage = () => {
-    const formData = new FormData();
-    formData.append("ID_image", selectedImg.ID_image);
-
-    axios
-      .post(
-        "http://localhost/bothniabladet/bothniabladet_backend/server/api/image/delete.php",
-        formData
-      )
-      .then((res) => {
-        console.log(res);
-        // reload website
-        window.location.reload();
-      });
-  };
-  const controlDelete = () => {
-    setTryDelete(true);
-  };
-  const verifyDelete = (answer) => {
-    if (answer === true) {
-      deleteImage();
-      console.log("delete");
-    } else {
-      setTryDelete(false);
-      console.log("cancel");
-    }
-  };
-  const getImageKeywords = () => {
-    const formData = new FormData();
-    formData.append("ID_image", selectedImg.ID_image);
-
-    let keys = [];
-    axios
-      .get(
-        `http://localhost/bothniabladet/bothniabladet_backend/server/api/keyword/keyword_by_id_image.php?id=${selectedImg.ID_image}`
-      )
-      .then((res) => {
-        //console.log("Keyword result: " + res.data.keywords);
-        const newKey = res.data.keywords + " ";
-
-        keys.push(newKey);
-      });
-
-    setKeywordsData(keys);
-  };
-  useEffect(() => {
-    getImageKeywords();
-  }, []);
-
-  return (
-    <motion.div
-      className="backdrop"
-      onClick={handleClick}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <div className="icons-div">
-        {user ? (
-          user.member_type === "m" ? (
-            <div className="model-icon" onClick={toggleEditKeys}>
-              <i class="fas fa-key"></i>
-              <p>Nytt nyckelord</p>
+    return (
+        <motion.div className='backdrop' onClick={handleClick} 
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}>
+        <div className="icons-div">
+        { user ?
+             user.member_type === 'm' ? <div className="model-icon" onClick={toggleEditKeys }>
+                <i class="fas fa-key"></i>
+                <p>Nytt nyckelord</p>
+            </div> : null 
+        : null }
+        {imageInfo ? <div className="model-icon" onClick={toggleImageInfo } >
+                <i class="fas fa-image"></i>
+                <p>Bild</p>
+            </div> : 
+        <div className="model-icon" onClick={toggleImageInfo } >
+                <i class="fas fa-info"></i>
+                <p>Info</p>
             </div>
-          ) : null
-        ) : null}
-        {imageInfo ? (
-          <div className="model-icon" onClick={toggleImageInfo}>
-            <i class="fas fa-image"></i>
-            <p>Bild</p>
-          </div>
-        ) : (
-          <div className="model-icon" onClick={toggleImageInfo}>
-            <i class="fas fa-info"></i>
-            <p>Info</p>
-          </div>
-        )}
-        {user ? (
-          user.member_type === "m" ? (
-            <div className="model-icon-delete" onClick={controlDelete}>
-              <i class="fas fa-trash-alt"></i>
-              <p>Radera bild</p>
+        }
+        { user ?
+             user.member_type === 'm' ? <div className="model-icon-delete" onClick={controlDelete}>
+                <i class="fas fa-trash-alt"></i>
+                <p>Radera bilden</p>
+            </div> : null 
+        : null }
+        {tryDelete ? 
+        <div>
+            <p style={{color: 'white'}}>Är du säker du vill radera bilden?</p>
+        <Button style={{backgroundColor: 'red', margin: '10px'}} variant="contained" color="primary" onClick={() => verifyDelete(true)} >
+        Ja
+        </Button>
+        <Button style={{margin: '10px'}} variant="contained" color="primary" onClick={() => verifyDelete(false)} >
+        Nej
+        </Button> </div> : null}
+
+        <div className=""> 
+            { editKeys ? <div className="edit-keys">
+                <TextField color="primary"  onChange={handleChangeKeys} label='Skriv nyckelordet här..' defaultValue="" 
+                InputLabelProps={{className:'key-textfield'}} InputProps={{className:'key-textfield'}} />
+                <Button variant="contained" color="primary" onClick={submitKey}>
+                Lägg till
+                </Button>
+            </div> : null }
             </div>
-          ) : null
-        ) : null}
-        {tryDelete ? (
-          <div>
-            <p style={{ color: "white" }}>
-              Är du säker på att du vill radera bilden?
-            </p>
-            <Button
-              style={{ backgroundColor: "red", margin: "10px" }}
-              variant="contained"
-              color="primary"
-              onClick={() => verifyDelete(true)}
-            >
-              Ja
-            </Button>
-            <Button
-              style={{ margin: "10px" }}
-              variant="contained"
-              color="primary"
-              onClick={() => verifyDelete(false)}
-            >
-              Nej
-            </Button>{" "}
-          </div>
-        ) : null}
-      </div>
-      <div className="">
-        {editKeys ? (
-          <div className="edit-keys">
-            <TextField
-              color="primary"
-              onChange={handleChangeKeys}
-              label="Enter key here"
-              defaultValue=""
-              InputLabelProps={{ className: "key-textfield" }}
-              InputProps={{ className: "key-textfield" }}
-            />
-            <Button variant="contained" color="primary" onClick={submitKey}>
-              Lägg till
-            </Button>
-          </div>
-        ) : null}
-      </div>
-      {addedSucess ? (
-        <div className="sucess-text">
-          <p>Nyckelord har lagts till</p>
+            { addedSucess ? <div className="sucess-text">
+                <p>Nycelordet har lagts till</p>
+            </div> : null }
         </div>
-      ) : null}
+            
+            
+        {imageInfo ? null : 
+            <motion.img initial={{ y: "-100vh"}} animate={{ y: 0}}
+            src={selectedImg.imageURL} alt="Enlarged"/>
+        }
 
-      {imageInfo ? null : (
-        <motion.img
-          initial={{ y: "-100vh" }}
-          animate={{ y: 0 }}
-          src={selectedImg.imageURL}
-          alt="Enlarged"
-        />
-      )}
+            { imageInfo ? 
+            <motion.div initial={{ y: "-100vh"}} animate={{ y: 0}}
+            className='backdrop-info'>
 
             <div className='info-row'>
             <p>Fotograf:</p>
@@ -335,20 +285,7 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             </div>
             <div className='info-row'>
             <p>GPS:</p>
-            <StyledInput
-              onChange={handleChangeGPS_coordinates}
-              fullWidth
-              defaultValue={selectedImg.GPS_coordinates}
-            ></StyledInput>
-          </div>
-          {limitedUsage ? (
-            <div className="info-row">
-              <p>Available copies:</p>
-              <StyledInput
-                onChange={handleChangeLimited_usage}
-                fullWidth
-                defaultValue={selectedImg.limited_usage}
-              ></StyledInput>
+            <StyledInput onChange={handleChangeGPS_coordinates} fullWidth defaultValue={selectedImg.GPS_coordinates}  ></StyledInput>
             </div>
             {limitedUsage ? <div className='info-row'>
             <p>Tillgängligt antal:</p>
@@ -359,7 +296,7 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             </div>}
 
 
-          {keywordsData ? (
+            {keywordsData ? 
             <div className="info-row">
                 <p>Nyckelord: {keywordsData}</p>
             </div> 
@@ -388,39 +325,9 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             </motion.div>
             : null}
 
-          {user ? (
-            user.member_type === "m" ? (
-              <div>
-                <div className="file-input">
-                  <FormControlLabel
-                    style={{ color: "white" }}
-                    control={
-                      <Checkbox
-                        style={{ color: "white" }}
-                        value="published"
-                        color="primary"
-                        onChange={published}
-                      />
-                    }
-                    label="Archive"
-                  />
-                </div>
-                <div className="file-input">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={updateImage}
-                  >
-                    Update image info
-                  </Button>
-                </div>
-              </div>
-            ) : null
-          ) : null}
         </motion.div>
-      ) : null}
-    </motion.div>
-  );
-};
+    )
+}
 
-export default Model;
+export default Model
+
