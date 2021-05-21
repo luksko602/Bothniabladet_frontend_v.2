@@ -1,5 +1,11 @@
 import React from 'react'
 
+/**
+ * Title component
+ * Returns HTML title
+ * @author Simon Nilsson, simnil-8
+*/
+
 const Title = () => {
     return (
         <div className="title">

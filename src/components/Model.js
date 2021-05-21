@@ -11,6 +11,12 @@ import axios from "axios";
 import { UserContext } from "../UserContext";
 import { motion } from "framer-motion";
 
+/**
+ * Model component
+ * Handles viewing and modification of a selected image
+ * @author Simon Nilsson, simnil-8
+*/
+
 const StyledInput = withStyles({
   root: {
     borderRadius: 3,
@@ -22,15 +28,23 @@ const StyledInput = withStyles({
 })(Input);
 
 const Model = ({ selectedImg, setSelectedImg }) => {
+  // Get global user
+  const { user } = useContext(UserContext);
+  // Store if user is trying to edit keys
   const [editKeys, setEditKeys] = useState(false);
+  // Store input from user for a new keyword
   const [keyData, setKeyData] = useState("");
+  // Store if image has limited usage
   const [limitedUsage, setLimitedUsage] = useState(true);
+  // Sucess message
   const [addedSucess, setAddedSucess] = useState(false);
 
-  const { user } = useContext(UserContext);
-
+  // Store if image info is selected
   const [imageInfo, setImageInfo] = useState(false);
+  // Store if user is trying to delete the image
+  const [tryDelete, setTryDelete] = useState(false);
 
+  // Stores data fetched from the backend
   const [photographerData, setPhotographerData] = useState(null);
   const [cameraData, setCameraData] = useState(null);
   const [locationData, setLocationData] = useState(null);
@@ -38,47 +52,46 @@ const Model = ({ selectedImg, setSelectedImg }) => {
   const [GPS_coordinatesData, setGPS_coordinatesData] = useState(null);
   const [limited_usageData, setLimited_usageData] = useState(null);
   const [publishedData, setPublishedData] = useState(false);
-
   const [keywordsData, setKeywordsData] = useState([]);
-
-  const [tryDelete, setTryDelete] = useState(false);
-
+  
+  // Check if image  has limited usage
   const checkIfLimited = () => {
     if (selectedImg.limited_usage < 0) {
       setLimitedUsage(false);
     } else {
       setLimitedUsage(true);
     }
-    console.log(limitedUsage);
   };
-
+  // Will exit model view if user clicks outside image (on backdrop)
   const handleClick = (e) => {
     // Check if clicked outside of image
     if (e.target.classList.contains("backdrop")) {
       setSelectedImg(null);
     }
   };
+  // Gets called when a image is selected
   useEffect(() => {
     checkIfLimited();
   });
-
+  // Toggles edit key function
   const toggleEditKeys = () => {
     setEditKeys(!editKeys);
     setAddedSucess(false);
   };
-
+  // Stores value user enters
   const handleChangeKeys = (val) => {
     setKeyData(val.target.value);
-    console.log(val.target.value);
   };
+  // Send the new key to backend
+  // Connects the keyword with the selected image
   const submitKey = () => {
-    console.log("submittar: " + keyData);
-
+    // Appends new keyword and image ID to form data
     const formData = new FormData();
     formData.append("keyword", keyData);
     formData.append("ID_image", selectedImg.ID_image);
-
+    // Checks if something has been entered
     if (keyData.length > 0) {
+      // HTTP request
       axios
         .post(
           "http://localhost/bothniabladet/bothniabladet_backend/server/api/keyword/keyword_connect.php",
@@ -88,18 +101,25 @@ const Model = ({ selectedImg, setSelectedImg }) => {
           console.log(res);
         });
     } else {
-      // dont post
+      // Won't post
       console.log("Did not submit, value is empty");
     }
-    // to reset and hide add key
+    // Resets and hide add key textfield
     setEditKeys(false);
     setAddedSucess(true);
   };
+  // Toggle image info
   const toggleImageInfo = () => {
     setImageInfo(!imageInfo);
   };
-
+  /**
+   * Update image information
+   * Send new user entered data to backend
+   */
   const updateImage = () => {
+    
+    // Checks if data is null 
+    // Appends and stores the new data to form data
     const formData = new FormData();
     formData.append("ID_image", selectedImg.ID_image);
     if (photographerData != null) {
@@ -123,6 +143,7 @@ const Model = ({ selectedImg, setSelectedImg }) => {
     if (publishedData) {
       formData.append("published", 0);
     }
+    // HTTP request
     axios
       .post(
         "http://localhost/bothniabladet/bothniabladet_backend/server/api/image/update.php",
@@ -130,11 +151,12 @@ const Model = ({ selectedImg, setSelectedImg }) => {
       )
       .then((res) => {
         console.log(res);
-        // reload website
+        // Reload website to get new data
         window.location.reload();
       });
   };
-
+  // Handles user input and stores it
+  // Called on textfield onChange 
   const handleChangePhotographer = (val) => {
     setPhotographerData(val.target.value);
   };
@@ -153,22 +175,20 @@ const Model = ({ selectedImg, setSelectedImg }) => {
   const handleChangeLimited_usage = (val) => {
     setLimited_usageData(val.target.value);
   };
-  const handleChangePublished = (val) => {
-    setPublishedData(val.target.value);
-  };
+  // Toggle published
   const published = (e) => {
     if (e.target.checked) {
       setPublishedData(true);
     } else {
       setPublishedData(false);
     }
-    console.log(publishedData);
   };
-
+  // Delete image from backend
   const deleteImage = () => {
+    // Store image ID
     const formData = new FormData();
     formData.append("ID_image", selectedImg.ID_image);
-
+    // HTTP request
     axios
       .post(
         "http://localhost/bothniabladet/bothniabladet_backend/server/api/image/delete.php",
@@ -176,13 +196,15 @@ const Model = ({ selectedImg, setSelectedImg }) => {
       )
       .then((res) => {
         console.log(res);
-        // reload website
+        // Reload website
         window.location.reload();
       });
   };
+  // Activate control window before deleting image
   const controlDelete = () => {
     setTryDelete(true);
   };
+  // Handle user input before deleting image
   const verifyDelete = (answer) => {
     if (answer === true) {
       deleteImage();
@@ -192,25 +214,31 @@ const Model = ({ selectedImg, setSelectedImg }) => {
       console.log("cancel");
     }
   };
+  // Get image keywords from backend
   const getImageKeywords = () => {
+    // Store image ID
     const formData = new FormData();
     formData.append("ID_image", selectedImg.ID_image);
-
+    // Temp array for keywords
     let keys = [];
+    // HTTP request
     axios
       .get(
         `http://localhost/bothniabladet/bothniabladet_backend/server/api/keyword/keyword_by_id_image.php?id=${selectedImg.ID_image}`
       )
       .then((res) => {
+        // Add keywords 
         console.log("Keyword result: " + res.data.keywords);
         const key = res.data.keywords + " ";
         keys.push(key);
       });
-
-    setKeywordsData(keys);
+      // Store the keywords
+      setKeywordsData(keys);
   };
+  // Fetch image keywords on page load
   useEffect(() => {
     getImageKeywords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -376,7 +404,7 @@ const Model = ({ selectedImg, setSelectedImg }) => {
               <StyledInput fullWidth value={"Ingen begränsning"}></StyledInput>
             </div>
           )}
-
+           {/*eqeqeq*/}
           {keywordsData != "undefined " ? (
             <div className="info-row">
               {console.log(keywordsData)}

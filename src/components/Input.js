@@ -1,6 +1,12 @@
 import { TextField } from '@material-ui/core'
 import React from 'react'
 
+/**
+ * Input component
+ * Textfield that returns input on change
+ * @author Simon Nilsson, simnil-8
+*/
+
 const Input = ({submit, change}) => {
 
     return (

@@ -3,12 +3,21 @@ import React, { useContext} from 'react'
 import { UserContext } from './UserContext';
 import { Link } from 'react-router-dom';
 
+/**
+ * Account component
+ * Handles users account page
+ * @author Simon Nilsson, simnil-8
+*/
 
 function Account() {
 
+    // Holds global user info
     const {user, setUser} = useContext(UserContext);
     
-
+    /**
+     * Log out function
+     * Sets the global user to null
+     */
     const logOut = () => {
         setUser(null);
     }

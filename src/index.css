@@ -1,251 +1,239 @@
-:root {
+/**
+ * Global CSS stylings
+ * Handles the CSS for the web app
+ * @author Simon Nilsson, simnil-8
+*/
+/* -----------------------------  Base Style  ---------------------------------------- */
+/* Store colors */
+:root{
   --primary: #efb6b2;
   --secondary: #4e4e4e;
   --error: #ff4a4a;
 }
-
+/* Styling that apply to everything */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
-
-/* -----------------------------  Base Style & Title  ---------------------------------------- */
-body {
+/* Set the color on the body */
+body{
   color: var(--secondary);
 }
-.App {
-  margin: 0 auto;
-}
-.title h2,
-.title p {
-  text-align: center;
-}
-.title h2 {
-  margin-top: 60px;
-  font-size: 2.6rem;
-}
-.link-style {
-  text-decoration: none;
-}
+  /* Remove link decoration */
+  .link-style{
+    text-decoration: none;
+  }
+/* -----------------------------  Title Style ---------------------------------------- */
 
+  /* Center h2 and p elements  */
+  .title h2, .title p{
+    text-align: center;
+  }
+  /* Style h2 element */ 
+  .title h2{
+    margin-top: 60px;
+    font-size: 2.6rem;
+  }
+
+  
 /* -----------------------------  Gallery Style ---------------------------------------- */
+/* Style the div containing the images */
 .img-wrap {
   opacity: 0.8;
   animation: fadeIn 0.5s;
-  -webkit-animation: fadeIn 0.5s;
-  -moz-animation: fadeIn 0.5s;
-  -o-animation: fadeIn 0.5s;
-  -ms-animation: fadeIn 0.5s;
+
 }
+/* Add a hover effec to the div containing the images */
 .img-wrap:hover {
   opacity: 1;
   transition-duration: 0.3s;
 }
-.search-fail {
-  margin-top: 50px;
-  text-align: center;
+/* Style the message that appears when no images are found */
+.search-fail{
+    margin-top: 50px;
+    text-align: center;
 }
-
+/* Animates a fade in effect */
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
-@-moz-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
-@-o-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
-@-ms-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.8;
-  }
+  0% {opacity:0;}
+  100% {opacity:0.8;}
 }
 
 /* -----------------------------  Model Style ---------------------------------------- */
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+/* Backdrop when opening enalrged images */
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
-.backdrop img {
-  display: block;
-  max-width: 80%;
-  max-height: 70%;
-  margin: 10px auto;
-  box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
-  border: 3px solid white;
+/* Style the enalrged image */
+.backdrop img{
+    display: block;
+    max-width: 80%;
+    max-height: 70%;
+    margin: 10px auto;
+    box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+    border: 3px solid white;
+    
 }
-.backdrop-info {
-  display: block;
-  max-width: 60%;
-  max-height: 70%;
-  margin: 10px auto;
-  background-color: rgba(0, 0, 0, 0.9);
-  border: 1px solid white;
-  overflow-y: scroll;
+/* Style the image's info window */
+.backdrop-info{
+    display: block;
+    max-width: 60%;
+    max-height: 70%;
+    margin: 10px auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid white;
+    overflow-y:scroll;
+    
 }
-.info-row {
+/* Style the individial rows in the image's info window */
+.info-row{
   display: block;
   margin: 5px;
   margin-left: 10px;
   margin-right: 10px;
+  
 }
-
-.backdrop-info p {
+/* Style the p element inside the info window */
+.backdrop-info p{
   display: flex;
   color: white;
   margin-bottom: 5px;
 }
-/*
+/* Style the div containing the editing icons */
 .icons-div{
-  text-align: center;
-  margin-top: 75px;
-}
-*/
-
-.icons-div {
   text-align: center;
   margin-top: 80px;
   background: linear-gradient(90deg, rgb(31, 31, 31) 0%, rgb(31, 30, 30) 100%);
   transition-duration: 0.5s;
 }
-
-.model-icon {
+/* Style the individual editing icon */
+.model-icon{
   display: inline-block;
   margin: 15px;
   color: var(--primary);
   text-align: center;
   cursor: pointer;
+  
 }
+/* Styling when hobering over an icon */
 .model-icon:hover {
   color: rgb(255, 253, 253);
   transition: all 0.2s ease-out;
 }
-.model-icon-delete {
+/* Individual styling for the delete icon */
+.model-icon-delete{
   display: inline-block;
   margin: 15px;
   color: red;
   text-align: center;
   cursor: pointer;
 }
+/* Hover effect for the delete icon */
 .model-icon-delete:hover {
   color: rgb(255, 253, 253);
   transition: all 0.2s ease-out;
 }
-.edit-keys {
+/* Invividual styling for the edit key icon */
+.edit-keys{
   margin-top: 10px;
   text-align: center;
 }
-.sucess-text {
+/* Styling for the response text when adding a key */
+.sucess-text{
   margin-top: 10px;
   text-align: center;
   color: var(--primary) !important;
 }
-.key-textfield {
+/* Textfield when adding a key */
+.key-textfield{
   color: var(--primary) !important;
 }
 
 /* -----------------------------  Upload Form ---------------------------------------- */
-
-form {
-  margin: 30px auto 10px;
-  text-align: center;
-}
-label input {
-  height: 0;
-  width: 0;
-  opacity: 0;
-}
-.upload-label {
-  display: block;
-  width: 60px;
-  height: 60px;
-  border: 2px solid var(--primary);
-  border-radius: 50%;
-  margin: 10px auto;
-  line-height: 60px;
-  color: var(--primary);
-  font-weight: bold;
-  font-size: 3rem;
-}
-label:hover {
-  background: var(--primary);
-  color: white;
-}
-.output {
-  height: 30px;
-  font-size: 0.8rem;
-  text-align: center;
-}
-.file-input {
-  margin-bottom: 1rem;
-  text-align: center;
-}
-.file-input Button {
-  background: var(--primary);
-  margin: 10px auto;
-}
-.error {
-  color: var(--error);
-}
-.preview-img {
-  display: block;
-  max-width: 25%;
-  max-height: 25%;
-  margin: 10px auto;
-  box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
-  border: 3px solid grey;
+/* Styling the form in the Upload component */
+form{
+    margin: 30px auto 10px;
+    text-align: center;
+  }
+  /* Styling the file input label */
+  label input{
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  /* Styling the file input label */
+  .upload-label{
+    display: block;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    margin: 10px auto;
+    line-height: 60px;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 3rem;
+  }
+  /* Add hover effect to the file input label */
+  label:hover{
+    background: var(--primary);
+    color: white;
+  }
+  /* Style text output text under fileinput (filetype/error text) */
+  .output{
+    height: 30px;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  /* Style the textfields on the Upload component */
+  .file-input{
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  /* Style the button on the Upload component */
+  .file-input Button{
+    background: var(--primary);
+    margin: 10px auto;
+  }
+  /* Style the error message */
+  .error{
+    color: var(--error);
+  }
+  /* Style the preview image */
+  .preview-img{
+    display: block;
+    max-width: 25%;
+    max-height: 25%;
+    margin: 10px auto;
+    box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+    border: 3px solid grey;   
 }
 
 /* -----------------------------  Sign in ---------------------------------------- */
+/* Syle the container for the sign in component */
 .signin-box {
   margin-top: 20px;
   text-align: center;
 }
+/* Style the button for the sign in component */
 .signin-box Button {
   margin: 10px auto;
   text-align: center;
   background: var(--primary);
+  
 }
 /* -----------------------------  Account ---------------------------------------- */
-
+/* Style the buttons in the account component */
 .Button {
   margin: 10px auto;
   text-align: center;
   background: var(--primary);
 }
+

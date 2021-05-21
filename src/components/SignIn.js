@@ -15,6 +15,12 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
+/**
+ * Sign in component (MaterialUI-Template)
+ * Handles sign in logic
+ * @author Simon Nilsson, simnil-8
+*/
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -52,34 +58,41 @@ export default function SignIn() {
 
   const classes = useStyles();
 
+  // Holds global user info
   const {user, setUser} = useContext(UserContext);
 
+  // Local useStates
   const [emailData, setEmailData] = useState('');
   const [passwordData, setPasswordData] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   
  
-    // Logic here
+    /**
+     * Handles log in logic
+     * @param {*} email 
+     * @param {*} password 
+     */
     const login = async (email, password) => {
-      //event.preventDefault();
+      // Holds request string
       let request = '';
-      
+      // HTTP request
       request = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/login.php?email=${email}&password=${password}`)
-      
       const response = await axios.get(request);
-      
+      // Response from backend
       const data = response.data;
       console.log(data.status);
-
+      
+      // If account exists
       if(data.status){
-        
+      // Holds request string
       let requestUser = '';
+      // HTTP request
       requestUser = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/read_single.php?id=${data.ID_member}`)
       const responseUser = await axios.get(requestUser);
+      // Response from backend
       const dataUser = responseUser.data;
 
-      console.log('ID: ' + dataUser.ID_member);
-     
+      // Set global user information with values from backend
       setUser({...user,
       ID_member: dataUser.ID_member,
       email: dataUser.email,
@@ -94,22 +107,20 @@ export default function SignIn() {
       member_type: dataUser.member_type,   
   }); 
 }else{
+  // Gets called if there is no user
   console.log('Log in failed');
   setErrorMessage('Det finns ingen användare med dessa uppgifter!');
-}
-  //window.location.reload();
   }
-
-
-
+}
+    // Input handlers
+    // Gets called onChange
     const handleChangeEmail = (val) => {
       setEmailData(val.target.value);
-      console.log(val.target.value);
     }
     const handleChangePassword = (val) => {
       setPasswordData(val.target.value);
-
     }
+    // If global user contains informaiton (is logged in)
     if(user){
       return(
         <Container className="signin-box">

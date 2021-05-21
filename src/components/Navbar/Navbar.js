@@ -4,7 +4,15 @@ import { Button } from "../Button"
 import './Navbar.css'
 import { Link } from 'react-router-dom';
 
+/**
+ * Navbar component
+ * Handles navigation on application for users not logged in
+ * @author Simon Nilsson, simnil-8
+ * @author Christoffer Lindberg,
+*/
+
 class Navbar extends Component {
+// Store if items are clicked or not
 state = { clicked: false}
 
 handleClick = () => {

@@ -1,3 +1,10 @@
+/**
+ * Array of items for the navbar
+ * Stores names and paths
+ * @author Simon Nilsson, simnil-8
+ * @author Christoffer Lindberg,
+*/
+
 export const MenuItems = [
   {
     title: "Hem",

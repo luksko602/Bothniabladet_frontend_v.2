@@ -1,7 +1,11 @@
+/**
+ * Styling for the button in navbar
+ * @author Christoffer Lindberg,
+*/
 :root {
     --primary: #3acbf7;
 }
-
+/* Style the button */
 .btn {
     margin-left: 10px;
     margin-right: 10px;
@@ -11,7 +15,7 @@
     border: none;
     cursor: pointer;
 }
-
+/* Add a hover effect to the button */
 .btn:hover {
     padding: 8px 20px;
     transition: all 0.3s ease-out;
@@ -19,11 +23,11 @@
     color: #6568F4;
     transition: 250ms;
 }
-
+/* Change background colot for primary button */
 .btn--primary {
     background-color: var(--primary);
 }
-
+/* Style the buttons outline */
 .btn--outline {
     background-color: transparent;
     color: #fff;
@@ -32,14 +36,14 @@
     border: 1px solid var(--primary);
     transition: all 0.3s ease-out;
 }
-
+/* Style the medium button */
 .btn--medium {
     padding: 8px 20px;
     border-radius: 4px;
     font-size: 18px;
     color: #fff;
 }
-
+/* Style the large button */
 .btn-large {
     padding: 12px 26px;
     border-radius: 4px;

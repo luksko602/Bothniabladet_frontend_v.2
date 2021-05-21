@@ -1,6 +1,11 @@
 import React from 'react'
 import './Button.css'
 
+/**
+ * Button for navbar
+ * @author Christoffer Lindberg,
+*/
+
 const STYLES = [
     'btn--primary',
     'btn--outline'

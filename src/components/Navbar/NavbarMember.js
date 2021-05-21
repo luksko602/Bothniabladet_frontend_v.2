@@ -4,6 +4,13 @@ import { Button } from "../Button"
 import './Navbar.css'
 import { Link } from 'react-router-dom';
 
+/**
+ * Navbar for members component
+ * Handles navigation on application for users that are logged in
+ * @author Simon Nilsson, simnil-8
+ * @author Christoffer Lindberg,
+*/
+
 class NavbarMember extends Component {
 state = { clicked: false}
 

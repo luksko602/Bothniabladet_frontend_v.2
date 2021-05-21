@@ -1,6 +1,12 @@
 import { GridList, GridListTile, GridListTileBar } from '@material-ui/core'
 import React from 'react'
 
+/**
+ * Gallery component
+ * Handles sorting and returning images
+ * @author Simon Nilsson, simnil-8
+*/
+
 const Gallery = ({data, setSelectedImg, pageAmount }) => {
 
     // Return this if filter search failed

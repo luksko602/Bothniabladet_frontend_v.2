@@ -6,17 +6,26 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+/**
+ * Image upload component
+ * Handles uploading new images to backend
+ * @author Simon Nilsson, simnil-8
+*/
+
 function Upload() {
+  // Store file currently selected for preview
   const [filePreview, setFilePreview] = useState(null);
+  // Stores the image selected
   const [file, setFile] = useState(null);
+  // Feedback messages
   const [error, setError] = useState(null);
   const [feedback, setFeedback] = useState("");
+  // Used to decide if image was uploaded sucessfully
   const [uploaded, setUploaded] = useState(false);
-
+  
+  // Store image information
   const [photographerData, setPhotographerData] = useState("");
-  //const [cameraData, setCameraData] = useState('');
   const [locationData, setLocationData] = useState("");
-
   const [isLimitedUse, setIsLimitedUse] = useState(false);
   const [nrOfCopiesData, setNrOfCopies] = useState(null);
   // 0 = Not published | 1 = published
@@ -29,29 +38,38 @@ function Upload() {
   const changeHandler = (e) => {
     let selected = e.target.files[0];
     console.log(selected);
+    // Check if selected file is of correct file type
     if (selected && types.includes(selected.type)) {
+      // Store image
       setFile(selected);
       setError("");
-      // To preview img
+      // Set preview image
       setFilePreview(URL.createObjectURL(selected));
     } else {
       setFile(null);
+      // Show error message
       setError("Välj en bild! (png eller jpeg)");
     }
   };
+  /**
+   * Handles logic of uploading image
+   */
   const uploadHandler = () => {
+    // Append all the data to form data 
     const formData = new FormData();
     formData.append("image", file);
     formData.append("photographer", photographerData);
-    //formData.append('camera', cameraData,)
     formData.append("location", locationData);
+    // Check if it's a limited usage image
     if (isLimitedUse === true) {
+      // Store it's number of uses
       formData.append("limited_usage", nrOfCopiesData);
     } else {
+      // Set it to infinite usage
       formData.append("limited_usage", -1);
     }
     formData.append("published", publishedData);
-
+    // HTTP request
     axios
       .post(
         "http://localhost/bothniabladet/bothniabladet_backend/server/api/image/create.php",
@@ -59,6 +77,7 @@ function Upload() {
       )
       .then(function (response) {
         console.log(response);
+        // Check response status for sucess
         if (response.status === 200) {
           setUploaded(true);
           console.log("Uploaded");
@@ -74,58 +93,53 @@ function Upload() {
         console.log("Not uploaded");
       });
   };
+  // Handles user input
+  // Gets called onChange
   const handleChangePhotographer = (val) => {
     setPhotographerData(val.target.value);
-    console.log(val.target.value);
-  }; /*
-     const handleChangeCamera = (val) => {
-        setCameraData(val.target.value);
-        console.log(val.target.value);
-      }*/
+  };
   const handleChangeLocation = (val) => {
     setLocationData(val.target.value);
-    console.log(val.target.value);
   };
-
   const limitedUse = (e) => {
+    // Check if toggle is clicked
     if (e.target.checked) {
       setIsLimitedUse(true);
     } else {
       setIsLimitedUse(false);
     }
-    console.log(isLimitedUse);
   };
-
   const nrOfCopies = (val) => {
     if (isLimitedUse === true) {
       setNrOfCopies(val.target.value);
     } else {
       setNrOfCopies(-1);
     }
-    console.log(val.target.value);
   };
-
   const published = (e) => {
     if (e.target.checked) {
       setPublishedData(0);
     } else {
       setPublishedData(1);
     }
-    console.log(publishedData);
   };
+  
+  // Resets the upload page, to make it ready for another image upload
   const resetUpload = () => {
-    // setUploaded(false);
-    // setFeedback("");
-    // setFile(null);
-    // setPhotographerData("");
-    // setLocationData("");
-    // setIsLimitedUse(false);
-    // setNrOfCopies(null);
-    // setPublishedData(1);
+    /*
+    setUploaded(false);
+    setFeedback("");
+    setFile(null);
+    setPhotographerData("");
+    setLocationData("");
+    setIsLimitedUse(false);
+    setNrOfCopies(null);
+    setPublishedData(1);
+    */
     // Eller reload
     window.location.reload();
   };
-  // If image has been uploaded
+  // Check if image has been uploaded and return
   if (uploaded) {
     return (
       <Container className="signin-box">
@@ -170,9 +184,6 @@ function Upload() {
       <div className="file-input">
         <TextField onChange={handleChangePhotographer} label="Fotograf" />
       </div>
-      {/*<div className="file-input">
-                <TextField onChange={handleChangeCamera} label='Camera' />
-            </div>*/}
       <div className="file-input">
         <TextField onChange={handleChangeLocation} label="Plats" />
       </div>
@@ -217,7 +228,6 @@ function Upload() {
           <h2>{feedback}</h2>
         </div>
       ) : null}
-
       {file ? (
         <motion.img
           initial={{ y: "-100vh", opacity: 0 }}
