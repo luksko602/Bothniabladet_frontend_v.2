@@ -19,7 +19,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Bothniabladet
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -102,7 +102,7 @@ export default function SignUp() {
     request = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/login.php?email=${email}&password=${password}`)
     
     const response = await axios.get(request);
-    //teasdad
+    
     const data = response.data;
     console.log(data.status);
 
@@ -161,7 +161,7 @@ console.log('Log in failed');
   if(user){
     return(
       <Container className="signin-box">
-      <h1>Account created! </h1>
+      <h1>Ditt konto har skapats! </h1>
       <Link to='/account' className="link-style">
       <Button variant="contained" color="primary"  >My Account</Button>
       </Link>
@@ -178,7 +178,7 @@ console.log('Log in failed');
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Bli medlem
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -190,7 +190,7 @@ console.log('Log in failed');
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="Förnamn"
                 autoFocus
               />
             </Grid>
@@ -200,7 +200,7 @@ console.log('Log in failed');
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Efternamn"
                 name="lastName"
                 autoComplete="lname"
               />
@@ -222,7 +222,7 @@ console.log('Log in failed');
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Lösenord"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -236,7 +236,7 @@ console.log('Log in failed');
                 required
                 fullWidth
                 id="city"
-                label="City"
+                label="Stad"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -245,7 +245,7 @@ console.log('Log in failed');
                 required
                 fullWidth
                 id="postal"
-                label="Postal Code"
+                label="Postnummer"
                 name="postal"
               />
             </Grid>
@@ -256,7 +256,7 @@ console.log('Log in failed');
                 required
                 fullWidth
                 id="street"
-                label="Street"
+                label="Gata"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -265,7 +265,7 @@ console.log('Log in failed');
                 required
                 fullWidth
                 id="phone"
-                label="Phone"
+                label="Telefonnummer"
                 name="phone"
               />
             </Grid>
@@ -278,12 +278,12 @@ console.log('Log in failed');
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Bli medlem
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link to='/signin' variant="body2">
-                Already have an account? Sign in
+                Har du redan ett konto? Logga in!
               </Link>
             </Grid>
           </Grid>

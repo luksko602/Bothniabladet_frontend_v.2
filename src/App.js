@@ -15,13 +15,13 @@ import ContactUs from './components/ContactUs';
 import { UserContext } from './UserContext';
 import NavbarMember from './components/Navbar/NavbarMember';
 import Account from './Account';
-import Footer from './components/Footer';
+
 
 function App() {
-  
+
   const [user, setUser] = useState({
-       ID_member: null, 
-       email: null,     
+      ID_member: null, 
+      email: null,     
       password: null,   
       first_name: null,  
       last_name: null,    
@@ -54,7 +54,6 @@ function App() {
   const [pageAmount, setPageAmount] = useState({start: initStart, end: initEnd});
   const [maxPages, setMaxPages] = useState(null);
   
-
   // Load user data from storage
   useEffect(() => {
     
@@ -76,7 +75,6 @@ function App() {
     setLoading(true);
     const response = await axios.get('http://localhost/bothniabladet/bothniabladet_backend/server/api/image/read.php')
     const data = await response.data;
-    
     setPhotos(data);
     console.log(data);
     console.log(response);
@@ -85,8 +83,9 @@ function App() {
 
     setLoading(false);
   }
-
+  
   const filterData = async (input) => {
+
     let request = '';
     
     setLoading(true);
@@ -120,7 +119,7 @@ function App() {
     
     setLoading(false);
   }
-  
+
   // Handles changes in search field
   const handleChange = (val) => {
     setFormData(val.target.value);
@@ -165,7 +164,7 @@ function App() {
     console.log('Antal sidor: ' + result);
     setMaxPages(result);
   }
- 
+
   // Fetched gallery data
   useEffect(() => {
     fetchData();
@@ -179,14 +178,13 @@ function App() {
     alignItems: 'center',
   }}><CircularProgress size={100} /></div>;
 
- 
   return (
     
     <div className="App">
       <UserContext.Provider value={value}>
       <Router>
       { user ? <NavbarMember /> : <Navbar /> }
-      <Footer />
+        
       
 
       <Switch>
@@ -201,13 +199,13 @@ function App() {
       <Title />
       <Input change={handleChange} submit={handleSubmit} />
       <div style={{display: 'flex', justifyContent: 'center', margin: '1rem 0',}}>
-      <Pagination count={maxPages} variant="outlined" color="primary" size="large"
+      <Pagination count={maxPages} variant="outlined" color="primary" size="medium"
       onChange={pageChange} page={page}/>
       </div>
       <Gallery data={photos} setSelectedImg={setSelectedImg} pageAmount={pageAmount}  />
       
       { selectedImg && <Model selectedImg={selectedImg} setSelectedImg={setSelectedImg} /> }
-      
+
       </Container>
       
       </Switch>

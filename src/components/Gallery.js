@@ -7,7 +7,7 @@ const Gallery = ({data, setSelectedImg, pageAmount }) => {
     if(data.images === undefined){
         return (
             <div>
-                <h1 className="search-fail">No images found!</h1>
+                <h1 className="search-fail">Inga bilder hittades!</h1>
             </div>
         )
     }

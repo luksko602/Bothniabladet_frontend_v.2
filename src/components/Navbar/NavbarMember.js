@@ -35,7 +35,7 @@ closeMenu = () => {
                      })}
                  </ul>
                  <Link to='/account'>
-                 <Button>My Account</Button>
+                 <Button>Mitt konto</Button>
                  </Link>
             </nav>
         )

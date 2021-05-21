@@ -35,7 +35,7 @@ closeMenu = () => {
                      })}
                  </ul>
                  <Link to='/signin'>
-                 <Button>Sign in</Button>
+                 <Button>Logga in</Button>
                  </Link>
             </nav>
         )

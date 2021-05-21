@@ -34,7 +34,9 @@ const Model = ({ selectedImg, setSelectedImg }) => {
     const [limited_usageData, setLimited_usageData] = useState(null);
     const [publishedData, setPublishedData] = useState(false);
     
-    const [keywordsData, setKeywordsData] = useState([]);
+    const [keywordsData, setKeywordsData] = useState([
+
+    ]);
 
     const [tryDelete, setTryDelete] = useState(false);
 
@@ -186,7 +188,7 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             console.log('Keyword result: ' + res.data.keywords);
             
             setKeywordsData(JSON.stringify(res.data.keywords));
-
+            
         });
     }
         useEffect(() => {
@@ -201,12 +203,12 @@ const Model = ({ selectedImg, setSelectedImg }) => {
         { user ?
              user.member_type === 'm' ? <div className="model-icon" onClick={toggleEditKeys }>
                 <i class="fas fa-key"></i>
-                <p>Add keyword</p>
+                <p>Nytt nyckelord</p>
             </div> : null 
         : null }
         {imageInfo ? <div className="model-icon" onClick={toggleImageInfo } >
                 <i class="fas fa-image"></i>
-                <p>Image</p>
+                <p>Bild</p>
             </div> : 
         <div className="model-icon" onClick={toggleImageInfo } >
                 <i class="fas fa-info"></i>
@@ -216,31 +218,33 @@ const Model = ({ selectedImg, setSelectedImg }) => {
         { user ?
              user.member_type === 'm' ? <div className="model-icon-delete" onClick={controlDelete}>
                 <i class="fas fa-trash-alt"></i>
-                <p>Delete image</p>
+                <p>Radera bilden</p>
             </div> : null 
         : null }
         {tryDelete ? 
         <div>
-            <p style={{color: 'white'}}>Are you sure you want to delete this image?</p>
+            <p style={{color: 'white'}}>Är du säker du vill radera bilden?</p>
         <Button style={{backgroundColor: 'red', margin: '10px'}} variant="contained" color="primary" onClick={() => verifyDelete(true)} >
-        Yes
+        Ja
         </Button>
         <Button style={{margin: '10px'}} variant="contained" color="primary" onClick={() => verifyDelete(false)} >
-        No
+        Nej
         </Button> </div> : null}
-        </div>
-            <div className=""> 
+
+        <div className=""> 
             { editKeys ? <div className="edit-keys">
-                <TextField color="primary"  onChange={handleChangeKeys} label='Enter key here' defaultValue="" 
+                <TextField color="primary"  onChange={handleChangeKeys} label='Skriv nyckelordet här..' defaultValue="" 
                 InputLabelProps={{className:'key-textfield'}} InputProps={{className:'key-textfield'}} />
                 <Button variant="contained" color="primary" onClick={submitKey}>
-                Add key
+                Lägg till
                 </Button>
             </div> : null }
             </div>
             { addedSucess ? <div className="sucess-text">
-                <p>Keyword has been added</p>
+                <p>Nycelordet har lagts till</p>
             </div> : null }
+        </div>
+            
             
         {imageInfo ? null : 
             <motion.img initial={{ y: "-100vh"}} animate={{ y: 0}}
@@ -252,23 +256,23 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             className='backdrop-info'>
 
             <div className='info-row'>
-            <p>Photographer:</p>
+            <p>Fotograf:</p>
             <StyledInput onChange={handleChangePhotographer} fullWidth defaultValue={selectedImg.photographer}  ></StyledInput>
             </div>
             <div className='info-row'>
-            <p>Camera:</p>
+            <p>Kamera:</p>
             <StyledInput onChange={handleChangeCamera} fullWidth defaultValue={selectedImg.camera}  ></StyledInput>
             </div>
             <div className='info-row'>
-            <p>Date:</p>
+            <p>Datum:</p>
             <StyledInput  fullWidth value={selectedImg.date}  ></StyledInput>
             </div>
             <div className='info-row'>
-            <p>Resolution:</p>
+            <p>Upplösning:</p>
             <StyledInput onChange={handleChangeResolution} fullWidth defaultValue={selectedImg.resolution}  ></StyledInput>
             </div>
             <div className='info-row'>
-            <p>Size:</p>
+            <p>Storlek:</p>
             <StyledInput fullWidth value={selectedImg.file_size}  ></StyledInput>
             </div>
             <div className='info-row'>
@@ -276,7 +280,7 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             <StyledInput fullWidth value={selectedImg.file_type}  ></StyledInput>
             </div>
             <div className='info-row'>
-            <p>Location:</p>
+            <p>Plats:</p>
             <StyledInput onChange={handleChangeLocation} fullWidth defaultValue={selectedImg.location}  ></StyledInput>
             </div>
             <div className='info-row'>
@@ -284,21 +288,21 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             <StyledInput onChange={handleChangeGPS_coordinates} fullWidth defaultValue={selectedImg.GPS_coordinates}  ></StyledInput>
             </div>
             {limitedUsage ? <div className='info-row'>
-            <p>Available copies:</p>
+            <p>Tillgängligt antal:</p>
             <StyledInput onChange={handleChangeLimited_usage} fullWidth defaultValue={selectedImg.limited_usage}  ></StyledInput>
             </div> : <div className='info-row'>
-            <p>Available copies:</p>
-            <StyledInput fullWidth value={'Unlimited'}  ></StyledInput>
+            <p>Tillgängligt antal:</p>
+            <StyledInput fullWidth value={'Ingen begränsning'}  ></StyledInput>
             </div>}
 
 
             {keywordsData ? 
             <div className="info-row">
-                <p>Keywords: {keywordsData}</p>
+                <p>Nyckelord: {keywordsData}</p>
             </div> 
             : 
             <div className="info-row">
-            <p>Keywords: No keywords for this image</p>
+            <p>Nyckelord: Bilden har inga nyckelord</p>
             </div> }
             
 
@@ -308,12 +312,12 @@ const Model = ({ selectedImg, setSelectedImg }) => {
             <div className="file-input"> 
             <FormControlLabel style={{color: 'white'}}
             control={<Checkbox style={{color: 'white'}} value="published" color="primary" onChange={published} />}
-            label="Archive"
+            label="Arkivera bilden"
             />
             </div> 
             <div className="file-input">
                 <Button variant="contained" color="primary" onClick={updateImage} >
-                Update image info
+                Uppdatera bilden
                 </Button>
             </div> 
             </div> : null

@@ -95,11 +95,11 @@ body{
 .backdrop-info{
     display: block;
     max-width: 60%;
-    max-height: 90%;
+    max-height: 70%;
     margin: 10px auto;
     background-color: rgba(0, 0, 0, 0.9);
     border: 1px solid white;
-    overflow-y:auto;
+    overflow-y:scroll;
     
 }
 .info-row{
@@ -115,9 +115,20 @@ body{
   color: white;
   margin-bottom: 5px;
 }
+/*
 .icons-div{
   text-align: center;
+  margin-top: 75px;
 }
+*/
+
+.icons-div{
+  text-align: center;
+  margin-top: 80px;
+  background: linear-gradient(90deg, rgb(31, 31, 31) 0%, rgb(31, 30, 30) 100%);
+  transition-duration: 0.5s;
+}
+
 .model-icon{
   display: inline-block;
   margin: 15px;

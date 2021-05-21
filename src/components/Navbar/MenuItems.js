@@ -1,21 +1,21 @@
 export const MenuItems = [
     {
-        title: 'Home',
+        title: 'Hem',
         path: '/',
         cName: 'nav-links'
     },
     {
-        title: 'Upload',
+        title: 'Ladda upp',
         path: '/upload',
         cName: 'nav-links'
     }, 
     {
-        title: 'Contact us',
+        title: 'Kontakta oss',
         path: '/contact-us',
         cName: 'nav-links'
     },  
     {
-        title: 'Sign in',
+        title: 'Logga in',
         path: '/signin',
         cName: 'nav-links-mobile'
     },   

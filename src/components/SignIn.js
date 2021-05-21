@@ -67,7 +67,7 @@ export default function SignIn() {
       request = (`http://localhost/bothniabladet/bothniabladet_backend/server/api/member/login.php?email=${email}&password=${password}`)
       
       const response = await axios.get(request);
-      //teasdad
+      
       const data = response.data;
       console.log(data.status);
 
@@ -79,8 +79,6 @@ export default function SignIn() {
       const dataUser = responseUser.data;
 
       console.log('ID: ' + dataUser.ID_member);
-     
-  // Object version (Krånglar)
      
       setUser({...user,
       ID_member: dataUser.ID_member,
@@ -97,7 +95,7 @@ export default function SignIn() {
   }); 
 }else{
   console.log('Log in failed');
-  setErrorMessage('There is no user with that information!');
+  setErrorMessage('Det finns ingen användare med dessa uppgifter!');
 }
   //window.location.reload();
   }
@@ -115,9 +113,9 @@ export default function SignIn() {
     if(user){
       return(
         <Container className="signin-box">
-        <h1>Welcome {user.first_name} {user.last_name}! </h1>
+        <h1>Välkommen {user.first_name} {user.last_name}! </h1>
         <Link to='/account' className="link-style">
-        <Button variant="contained" color="primary"  >My Account</Button>
+        <Button variant="contained" color="primary"  >Mitt konto</Button>
         </Link>
         </Container>
       );
@@ -131,7 +129,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Logga in
         </Typography>
   
         <form className={classes.form} noValidate>
@@ -152,7 +150,7 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Lösenord"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -169,19 +167,19 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Logga in
           </Button>
           {errorMessage && <div className="error"> {errorMessage} </div>}
 
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+                Glömt ditt lösenord?
               </Link>
             </Grid>
             <Grid item>
               <Link to='/signup' variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Har du inget konto? Bli medlem!"}
               </Link>
             </Grid>
           </Grid>
