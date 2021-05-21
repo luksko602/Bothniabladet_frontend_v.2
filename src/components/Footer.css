@@ -1,0 +1,14 @@
+/*CSS för applikationens footer */
+.footer{
+    width: 100%;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    position: absolute;
+    bottom:  -50%;
+}
+.footercontent{
+    width: 100%;
+    text-align: center;
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
