@@ -1,5 +1,10 @@
 import React from 'react'
-import './ContactUS.css'
+import './ContactUS.css' //ContactUS.css kopplas till denna sida
+/**
+ * Funktion som visar kontaktsidan i applikationen oss des innehåll
+ * @returns 
+ * 
+ */
 function ContactUs() {
     return (
         <div class="contactpage-content">
