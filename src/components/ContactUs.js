@@ -2,6 +2,7 @@ import React from 'react'
 import './ContactUS.css' //ContactUS.css kopplas till denna sida
 /**
  * Funktion som visar kontaktsidan i applikationen oss des innehåll
+ * @author Linus Lindahl Marjavaara, iluama-6
  * @returns 
  * 
  */
